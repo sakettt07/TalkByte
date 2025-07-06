@@ -26,7 +26,7 @@ app.use(express.urlencoded({extended:true}));
 
 app.use(fileUpload({
     useTempFiles: true,
-    tempFileDir : './tmp/'   
+    tempFileDir : './temp/'   
 }))
 
 // all the routes originate from here
