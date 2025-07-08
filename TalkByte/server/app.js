@@ -8,6 +8,7 @@ import cors from 'cors';
 import { connectDB } from './database/db.js';
 
 import userRouter from './routes/user.routes.js';
+import messageRouter from './routes/message.routes.js';
 
 const app=express();
 
@@ -32,6 +33,7 @@ app.use(fileUpload({
 // all the routes originate from here
 
 app.use('/api/v1/user',userRouter);
+app.use('/api/v1/message',messageRouter);
 
 connectDB();
 export default app;
