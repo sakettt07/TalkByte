@@ -1,6 +1,8 @@
 import app from "./app.js";
 import {v2 as cloudinary} from 'cloudinary';
 import colors from 'colors';
+import http from 'http'
+import { initSocket } from "./utils/socket.js";
 
 cloudinary.config({
     cloud_name:process.env.CLOUDINARY_NAME,
@@ -8,6 +10,9 @@ cloudinary.config({
     api_secret:process.env.CLOUDINARY_API_SECRET
 })
 
-app.listen(process.env.PORT,()=>{
+const server=http.createServer(app);
+initSocket(server);
+
+server.listen(process.env.PORT,()=>{
     console.log(`Server is running on port ${process.env.PORT} in Dev mode`.blue.bold);
 })

@@ -6,4 +6,5 @@ const router=express.Router();
 
 router.route('/users').get(isAuthenticated,getAllUsers);
 router.route('/:id').get(isAuthenticated,getMessages);
-router.route('/send-message/:id').post(isAuthenticated,sendMessage);
+router.route('/send/:id').post(isAuthenticated,sendMessage);
+export default router;
