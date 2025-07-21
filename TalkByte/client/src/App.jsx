@@ -3,9 +3,13 @@ import {useDispatch, useSelector} from "react-redux";
 import { getUser } from './store/slices/auth.slice';
 import { connectSocket } from './lib/socket';
 import {Loader} from 'lucide-react';
-import {BrowserRouter as Router,Route,Routes} from 'react-router-dom';
+import {BrowserRouter as Router,Route,Routes, Navigate} from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
+import Register from './pages/Register';
+import Profile from './pages/Profile';
+import Login from './pages/Login';
+import toast,{Toaster} from 'react-hot-toast';
 const App = () => {
   const {user,isCheckingAuth}=useSelector((state)=>state.auth);
 
@@ -13,6 +17,7 @@ const App = () => {
   useEffect(()=>{
     dispatch(getUser());
   },[getUser]);
+
 
   useEffect(()=>{
     if(user){
@@ -34,8 +39,13 @@ const App = () => {
     <Router>
       <Navbar />
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={user?<Home />:<Navigate to={"/login"} />} />
+        <Route path='/register' element={!user?<Register />:<Navigate to={"/"} />} />
+        <Route path='/login' element={!user?<Login />:<Navigate to={"/"} />} />
+        <Route path='/profile' element={user?<Profile />:<Navigate to={"/login"} />} />
       </Routes>
+      <Toaster position="top-center"
+      reverseOrder={false} />
     </Router>
     </>
   )
