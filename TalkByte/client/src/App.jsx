@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import { getUser } from './store/slices/auth.slice';
-import { connectSocket } from './lib/socket';
+import { getUser, setOnlineUsers } from './store/slices/auth.slice';
+import { connectSocket, disconnectSocket } from './lib/socket';
 import {Loader} from 'lucide-react';
 import {BrowserRouter as Router,Route,Routes, Navigate} from 'react-router-dom';
 import Navbar from './components/Navbar';
